@@ -1,6 +1,6 @@
 <project name="HandFollower" basedir=".">
     
-    <!-- Run the Guardian application. -->
+    <!-- Run the Kinect demo. -->
     <target name="run" depends="compile">
         <echo>java.library.path=${java.library.path}</echo>
         <java classname="org.aria.h1.Kinect.Main" fork="true">
@@ -15,8 +15,7 @@
         </java>
     </target>
 
-    <!-- Compile HandFollower, the sample application which works
-         with MS Kinect in order to follow your hand. -->
+    <!-- Compile the Kinect demo. -->
     <target name="compile" depends="cleanup">
         <javac
             srcdir="${basedir}/src"
@@ -30,6 +29,7 @@
         </javac>
     </target>
 
+    <!-- Clean-up generated binaries. -->
     <target name="cleanup">
       <delete includeemptydirs="true">
         <fileset dir="${basedir}/build" includes="**/*"/>
