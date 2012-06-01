@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META name="revisit-after" content="10 days">
+<META name="robot" CONTENT="all">
+<META name="summary" content="HmmLib: Hidden Markov Model Library in Java">
+<META name="keywords" content="HmmLib, Hidden Markov Model, HMM, Java"> 
+<TITLE>HmmLib -> Source Code</TITLE>
+<SCRIPT type="text/javascript" language="JavaScript"
+src="stylesheet.js">
+</SCRIPT>
+</HEAD>
+<BODY>
+
+<DIV class="navbar">
+<A name="top">&nbsp;&nbsp;&nbsp;</A><A href="home.html"
+onMouseOver="self.status='Front Page'; return true;"
+onMouseOut="self.status=''; return true;"
+>Home</A>&nbsp;&nbsp;&nbsp;<A href="source.html"
+onMouseOver="self.status='View Source Code on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+onClick="return false;"
+>Source</A>&nbsp;&nbsp;&nbsp;<A href="documentation.html"
+onMouseOver="self.status='Browse Documentation on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+>Documentation</A>&nbsp;&nbsp;&nbsp;<A href="download.html"
+onMouseOver="self.status='Download Software/Documentation'; return true;"
+onMouseOut="self.status=''; return true;"
+>Download</A>&nbsp;&nbsp;&nbsp;<A href="feedback.html"
+onMouseOver="self.status='Feedback Information'; return true;"
+onMouseOut="self.status=''; return true;"
+>Feedback</A>
+</DIV>
+
+<DIV class="tophorzbar">
+<TABLE border="0" cellSpacing="0" width="100%">
+<TBODY><TR><TD class="horzbar">
+<TABLE border="0" cellPadding="0" cellSpacing="0">
+<TBODY><TR><TD>
+</TD></TR></TBODY></TABLE>
+</TD></TR></TBODY></TABLE>
+</DIV>
+
+
+
+<DIV class="body">
+
+<DIV class="heading">
+HmmLib: Hidden Markov Model Library in Java
+</DIV>
+
+
+
+<H3>About Source Codes</H3>
+
+<P>
+Complete source codes are available from
+<A href="src/index.html">On-Line Source Repository</A>.
+Please note that this software is copyrighted, and 
+you may not use it except in compliance with 
+<A href="license.html">the License</A>.
+</P>
+
+<P>
+The htmlization of source codes has been done using
+<A href="../htmlize/home.html">HTML-ization Utility Classes in Java</A>.
+</P>
+
+
+<H3>Table of Contents</H3>
+
+<DIV><DL>
+<!-- Write descriptions inside <DD> elements -->
+<DT><A href="src/util/util_program_index.html">[util]</A></DT>
+<DD>
+XML and Swing related utility classes.
+<DL>
+<!-- Write descriptions inside <DD> elements -->
+<DT><A href="src/util/XmlParserList_java.html">XmlParserList.java</A></DT>
+<DD>
+XmlParserList Interface.
+This interface defines XML parser names, which are used by hmm classes.
+Currently, only sun and ibm parsers are included
+in order to facilitate easy distribution.
+</DD>
+<DT><A href="src/util/DomParserFactory_java.html">DomParserFactory.java</A></DT>
+<DD>
+DomParserFactory is a wrapper class for XML parsers.
+This class exposes only DOM interfaces.
+(e.g. SAX interfaces are hidden regardless of parsers used.)
+Currently, only sun and ibm parsers are included
+in order to facilitate easy distribution.
+</DD>
+<DT><A href="src/util/LookFeel_java.html">LookFeel.java</A></DT>
+<DD>
+LookFeel is a helper class 
+to easily set and manipulate LookAndFeel of Java classes.
+Names of LookAndFeel are defined in LookFeelList.
+This code is adapted from Sun's Java on-line tutorials.
+</DD>
+<DT><A href="src/util/LookFeelList_java.html">LookFeelList.java</A></DT>
+<DD>
+LookFeelList defines the name of available LookAndFeels.
+This interface is implemented by LookFeel, which is a helper class 
+to easily set and manipulate LookAndFeel of Java classes.
+</DD>
+</DL>
+</DD>
+<DT><A href="src/Model_java.html">Model.java</A></DT>
+<DD>
+Markov model with symbol-generation probabilities.
+The class Hmm is built on top of this class.
+Please refer to Rabiner 1989.
+</DD>
+<DT><A href="src/Hmm_java.html">Hmm.java</A></DT>
+<DD>
+Hidden Markov model.
+This class adds a sequence of observed symbols to the class Model.
+Please refer to Rabiner 1989.
+</DD>
+<DT><A href="src/ProbabilityUnnormalizableException_java.html">ProbabilityUnnormalizableException.java</A></DT>
+<DD>
+ProbabilityUnnormalizableException extends Exception
+</DD>
+</DL></DIV>
+
+
+
+<!--
+<SCRIPT type="text/javascript" language="JavaScript"
+src="counterhidden.js">
+</SCRIPT>
+-->
+<DIV class="copyright">
+<SCRIPT type="text/javascript" language="JavaScript"
+src="footer.js">
+</SCRIPT>
+</DIV>
+</DIV>
+
+
+
+<DIV class="bottomhorzbar">
+<TABLE border="0" cellSpacing="0" width="100%">
+<TBODY><TR><TD class="horzbar">
+<TABLE border="0" cellPadding="0" cellSpacing="0">
+<TBODY><TR><TD>
+</TD></TR></TBODY></TABLE>
+</TD></TR></TBODY></TABLE>
+</DIV>
+
+<DIV class="navbar">
+<A name="bottom">&nbsp;&nbsp;&nbsp;</A><A href="home.html"
+onMouseOver="self.status='Front Page'; return true;"
+onMouseOut="self.status=''; return true;"
+>Home</A>&nbsp;&nbsp;&nbsp;<A href="source.html"
+onMouseOver="self.status='View Source Code on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+onClick="return false;"
+>Source</A>&nbsp;&nbsp;&nbsp;<A href="documentation.html"
+onMouseOver="self.status='Browse Documentation on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+>Documentation</A>&nbsp;&nbsp;&nbsp;<A href="download.html"
+onMouseOver="self.status='Download Software/Documentation'; return true;"
+onMouseOut="self.status=''; return true;"
+>Download</A>&nbsp;&nbsp;&nbsp;<A href="feedback.html"
+onMouseOver="self.status='Feedback Information'; return true;"
+onMouseOut="self.status=''; return true;"
+>Feedback</A>
+</DIV>
+
+
+</BODY>
+</HTML>

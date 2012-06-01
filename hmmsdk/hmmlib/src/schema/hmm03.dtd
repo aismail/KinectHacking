@@ -1,0 +1,166 @@
+<!-- ............................................................... -->
+<!-- Hidden Markov Model DTD ....................................... -->
+<!-- ............................................................... -->
+
+<!--
+TYPICAL INVOCATION FPI:
+#  <!DOCTYPE hmm PUBLIC
+#       "-//BLUECRAFT//DTD hmm v0.3//EN"
+#       "http://www.bluecraft.com/dtd/hmm03.dtd">
+!WARNING! The above link is broken. Please do not use public id.
+
+PURPOSE:
+  [1] Hmm data interchange format.
+  [2] com.bluecraft.hmm HMM library classes uses hmm03.dtd as internal
+  file format.
+
+STATUS OF THIS NOTE:
+  This is a working draft.
+  Distribution of this document is unlimited.
+
+DEPENDENCIES:
+  None.
+
+CHANGE HISTORY:
+  Nov. 15th, 1998. Yoon created v0.1.
+  Feb. 21st, 1999. v0.3
+
+MAINTAINER:
+  Hyoungsoo Yoon
+  BlueCraft Inc.
+  hyoon@vilab.com
+
+LEGAL NOTICE:
+  Copyright (C) BlueCraft Inc. 1999. All Rights Reserved.
+-->
+
+
+<!-- ............................................................... -->
+<!-- Notations and common entities ................................. -->
+<!-- ............................................................... -->
+
+<!ENTITY bluecraft  "Bluecraft Inc." >
+
+
+<!-- ............................................................... -->
+<!-- Entities for characters and symbols ........................... -->
+<!-- ............................................................... -->
+
+<!ENTITY lt     "&#38;#60;">
+<!ENTITY gt     "&#62;">
+<!ENTITY amp    "&#38;#38;">
+<!ENTITY apos   "&#39;">
+<!ENTITY quot   "&#34;">
+<!ENTITY nbsp   "&#160;">
+<!ENTITY mdash  "&#x2014;">
+<!ENTITY ldquo  "&#x201C;">
+<!ENTITY rdquo  "&#x201D;">
+
+
+<!-- ............................................................... -->
+<!-- Entities for common attributes ................................ -->
+<!-- ............................................................... -->
+
+<!ENTITY % attr.lang "
+     xml:lang CDATA #IMPLIED
+">
+<!ENTITY % attr.id "
+     id CDATA #IMPLIED
+">
+
+
+<!-- ............................................................... -->
+<!-- Entities for common elements .................................. -->
+<!-- ............................................................... -->
+
+<!ENTITY % hmm.preamble "
+     ( name , (revision)* , (author)* , (description)? )
+">
+<!ENTITY % hmm.body "
+     ( model )
+">
+<!ENTITY % hmm.hmm "
+     ( %hmm.preamble; , %hmm.body; )
+">
+<!ENTITY % hmm.probs "
+     ( transition_matrix , symbol_generation_matrix , initial_state_vector )
+">
+<!ENTITY % hmm.elements "
+     ( (element)* )
+">
+
+
+<!-- ............................................................... -->
+<!-- Hmm element and attribute definitions ......................... -->
+<!-- ............................................................... -->
+
+<!ELEMENT hmm ( %hmm.hmm; ) >
+<!ATTLIST hmm
+     %attr.lang;
+     version CDATA #REQUIRED
+     status (DRAFT | PRODUCTION) "PRODUCTION">
+<!ELEMENT name (#PCDATA) >
+<!ATTLIST name
+     %attr.lang; >
+<!ELEMENT description (#PCDATA) >
+<!ATTLIST description
+     %attr.lang; >
+<!ELEMENT author ( name , (affiliation)* , (contact)* ) >
+<!ATTLIST author
+     %attr.lang; >
+<!ELEMENT affiliation (#PCDATA) >
+<!ATTLIST affiliation
+     %attr.lang; >
+<!ELEMENT contact (#PCDATA) >
+<!ATTLIST contact
+     %attr.lang;
+     type (EMAIL | TELEPHONE | ADDRESS | WEB) "EMAIL" >
+<!ELEMENT revision (#PCDATA) >
+<!ATTLIST revision
+     date CDATA #IMPLIED >
+<!ELEMENT property EMPTY >
+<!ATTLIST property 
+     %attr.lang;
+     propID CDATA #REQUIRED
+     propValue CDATA #REQUIRED >
+<!ELEMENT model ( (property)* , (description)? , states , symbols ,
+     (bounds)? , %hmm.probs; ) >
+<!ATTLIST model
+     %attr.lang; >
+<!ELEMENT states ( (description)? ) >
+<!ATTLIST states
+     %attr.lang;
+     count CDATA #REQUIRED >
+<!ELEMENT symbols ( (description)? ) >
+<!ATTLIST symbols
+     %attr.lang;
+     count CDATA #REQUIRED >
+<!ELEMENT bounds ( (description)? ) >
+<!ATTLIST bounds
+     %attr.id;
+     ll_bound CDATA #IMPLIED
+     ur_bound CDATA #IMPLIED >
+<!ELEMENT transition_matrix ( %hmm.elements; ) >
+<!ATTLIST transition_matrix
+     %attr.id;
+     type ( ROW_COL | COL_ROW ) "ROW_COL" >
+<!ELEMENT symbol_generation_matrix ( %hmm.elements; ) >
+<!ATTLIST symbol_generation_matrix
+     %attr.id;
+     type ( ROW_COL | COL_ROW ) "ROW_COL" >
+<!ELEMENT initial_state_vector ( %hmm.elements; ) >
+<!ATTLIST initial_state_vector
+     %attr.id;
+     type ( ROW_COL | COL_ROW ) "ROW_COL" >
+<!ELEMENT element EMPTY >
+<!ATTLIST element
+     %attr.id;
+     row CDATA #IMPLIED
+     col CDATA #IMPLIED
+     value CDATA #REQUIRED >
+
+
+<!-- ............................................................... -->
+<!-- End of Hidden Markov Model DTD ................................ -->
+<!-- ............................................................... -->
+

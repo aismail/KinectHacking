@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="hmmbox/src/java"/>
+	<classpathentry kind="src" path="hmmlib/src/java"/>
+	<classpathentry kind="lib" path="hmmall/lib/bluecraft.common-0.9.jar"/>
+	<classpathentry kind="lib" path="hmmall/lib/bluecraft.tools-0.9.jar"/>
+	<classpathentry kind="lib" path="hmmbox/lib/bluecraft.common-0.9.jar"/>
+	<classpathentry kind="lib" path="hmmbox/lib/bluecraft.hmmlib-0.3.jar"/>
+	<classpathentry kind="lib" path="hmmbox/lib/bluecraft.tools-0.9.jar"/>
+	<classpathentry kind="lib" path="hmmbox/lib/jdbc2_0-stdext.jar"/>
+	<classpathentry kind="lib" path="hmmbox/lib/jhall.jar"/>
+	<classpathentry kind="lib" path="hmmlib/lib/bluecraft.common-0.9.jar"/>
+	<classpathentry kind="lib" path="hmmlib/lib/bluecraft.tools-0.9.jar"/>
+	<classpathentry kind="lib" path="hmmlib/lib/jdbc2_0-stdext.jar"/>
+	<classpathentry kind="lib" path="hmmlib/lib/jhall.jar"/>
+	<classpathentry kind="lib" path="www/htdocs/hmmlib-0.3/download/hmmlib.jar"/>
+	<classpathentry kind="lib" path="www/htdocs/hmmlib-0.3/download/hmmlib03_doc.jar"/>
+	<classpathentry kind="lib" path="www/htdocs/hmmlib-0.3/download/hmmlib03_src.jar"/>
+	<classpathentry kind="lib" path="www/htdocs/hmmlib-0.3/download/hmmlib03.jar"/>
+	<classpathentry kind="lib" path="www/htdocs/hmmlib-0.3/download/xml.jar"/>
+	<classpathentry kind="lib" path="www/htdocs/hmmlib-0.3/download/xml4j_1_1_9.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

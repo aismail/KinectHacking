@@ -1,0 +1,125 @@
+/*
+ * Style sheet for HmmLib Web Site
+ */
+
+
+/*
+ *  Navigation bar
+ */
+div.navbar {
+    font-weight: bold;
+    text-align: center;
+}
+div.navbar a:link {
+    color: green;
+}
+div.navbar a:visited {
+    color: green;
+}
+div.navbar a:active {
+    color: green;
+}
+div.navbar a:focus {
+    color: red;
+}
+div.navbar a:hover {
+    color: red;
+}
+
+
+div.logos {
+    text-align: center;
+}
+div.search {
+    text-align: center; 
+    margin-top: 0.0in; 
+    margin-bottom: 0.0in;
+}
+div.tophorzbar {
+    text-align: center; 
+    margin-top: 0.05in; 
+    margin-bottom: 0.05in;
+}
+div.bottomhorzbar {
+    text-align: center; 
+    margin-top: 0.05in; 
+    margin-bottom: 0.05in;
+}
+td.horzbar {
+    background: #008811;
+    height: 2px;
+}
+
+
+/*
+ *  Main body
+ */
+body {
+    background: #ffffee;
+    color: black;
+    margin-top: 0.05in;
+    margin-bottom: 0.1in;
+}
+a:link {
+    color: green;
+}
+a:visited {
+    color: maroon;
+}
+a:active {
+    color: maroon;
+}
+a:focus {
+    color: red;
+}
+a:hover {
+    color: red;
+}
+
+img {
+    border-style: none; 
+    border-width: 0;
+}
+
+div.body {
+    background: #ffffdd;
+    text-align: left;
+    font-family: 'Times New Roman',Georgia,Arial,Helvetica; 
+    font-weight: normal; 
+    color: black;
+    margin: 0.01in;
+    margin-top: 0.01in;
+    margin-bottom: 0.0in;
+    padding: 0.1in;
+    padding-left: 0.2in;
+    padding-right: 0.2in;
+    border-style: none;
+    border-width: thin;
+}
+
+div.heading {
+    text-align: center;
+    color: green;
+    font-size: 15pt;
+    font-weight: bold;
+    padding-top: 0.05in;
+    padding-bottom: 0.05in;
+}
+
+div.copyright {
+    text-align: center;
+    color: black;
+    font-size: 10pt;
+    font-weight: normal;
+    padding-top: 0.0in;
+    padding-bottom: 0.0in;
+}
+
+span.hiddencounter {
+    visibility: hidden;
+}
+div.accesscounter {
+    text-align: center;
+    margin-top: 0.1in; 
+    margin-bottom: 0.2in;
+}

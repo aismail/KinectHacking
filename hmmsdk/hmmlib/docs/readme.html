@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>HmmSDK | HmmLib ReadMe</TITLE>
+<STYLE>
+body {
+    background: #ffffee;
+    color: black;
+    margin-top: 0.05in;
+    margin-bottom: 0.1in;
+}
+a:link {
+    color: green;
+}
+a:visited {
+    color: maroon;
+}
+a:active {
+    color: maroon;
+}
+a:focus {
+    color: red;
+}
+a:hover {
+    color: red;
+}
+div.body {
+    background: #ffffdd;
+    text-align: left;
+    font-family: 'Times New Roman',Georgia,Arial,Helvetica; 
+    font-weight: normal; 
+    color: black;
+    margin: 0.01in;
+    margin-top: 0.01in;
+    margin-bottom: 0.0in;
+    padding: 0.1in;
+    padding-left: 0.2in;
+    padding-right: 0.2in;
+    border-style: none;
+    border-width: thin;
+}
+div.heading {
+    text-align: center;
+    color: green;
+    font-size: 16pt;
+    font-weight: bold;
+    padding-top: 0.05in;
+    padding-bottom: 0.05in;
+}
+span.cvsid {
+    color: black;
+    font-family: Georgia,Arial,Helvetica; 
+    font-size: 8pt;
+    font-weight: normal;
+}
+</STYLE>
+</HEAD>
+<BODY>
+<DIV class="body">
+
+
+<DIV class="heading">
+HmmLib: Hidden Markov Model Library in Java<BR>
+<SPAN class="cvsid">$Id: readme.html,v 1.5 2003/05/28 04:57:47 drwye Exp $</SPAN>
+</DIV>
+
+<P>
+<B>HmmLib</B> is a Java class library which contains all
+essential functionalities of hidden Markov models (HMMs).
+It is not intended to be used for commercial purposes, for
+the efficiency was not the primary factor in its implementation.
+Rather, it is hoped that the implementation is clear and transparent
+enough that it can be used as a model program for students wishing 
+to learn basics of HMMs.
+<B>HmmLib</B> is now a part of a larger software package called <B>HmmSDK</B>.
+Please visit 
+<A href="http://hmmsdk.sourceforge.net/">its home page</A> 
+for more information.
+</P>
+
+
+<H3>System Requirements</H3>
+
+<P>
+You need the version 1.4 or later of the software development kit for
+<A HREF="http://java.sun.com/j2se/">
+Java 2 Platform Standard Edition (J2SE)</A>
+in order to be able to use this library.
+
+If you have an eariler version of JDK, then you might still be able to use this: You'll need some extra libraries like XML parsers, and you might have to comment out some JDK1.4 specific keywords such as <I>assert</I>. This configuration is, however, not supported, and <B>HmmLib</B> is currently being developed only with JDK 1.4.
+</P>
+
+
+<H3>Installation</H3>
+
+<P>
+<UL>
+<LI> Unzip <B>hmmsdk-hmmlib-bin-M.m.r.b.zip</B> into an empty directory. (<B>M.m.r.b</B> represents a version number of a particular release.)
+<PRE>
+unzip hmmsdk-hmmlib-bin-M.m.r.b.zip
+</PRE>
+</LI>
+<LI>Please make sure you have the following folders and files:
+<TABLE>
+<TBODY>
+<TR>
+<TD width="180">bluecraft.hmmlib-M.m.jar</TD><TD>Class and resource files. Do not unzip this archive.</TD>
+</TR>
+<TR>
+<TD>lib/</TD><TD>Third-party library directory. These libraries may be required at either run-time or compile-time in order to be able to use <B>HmmLib</B>.</TD>
+</TR>
+<TR>
+<TD>schema/</TD><TD>XML Schema/DTD directory, which includes document type definition files for HMM serialization file format.</TD>
+</TR>
+<TR>
+<TD>docs/</TD><TD>Documentation directory, which includes this readme file and the public license file for this software.</TD>
+</TR>
+<TR>
+<TD>apidocs/</TD><TD>Javadoc directory. HTML-ized version of source files can be accessed from Javadocs.</TD>
+</TR>
+<TR>
+<TD colspan="2">&nbsp;</TD>
+</TR>
+</TBODY>
+</TABLE>
+</LI>
+<LI>Put <B>bluecraft.hmmlib-M.m.jar</B> into your CLASSPATH. (For example, on Windows)
+<PRE>
+set CLASSPATH=%CLASSPATH%;"YOUR_DIRECTORY"\bluecraft.hmmlib-M.m.jar
+</PRE>
+</UL>
+</P>
+
+
+<H3>How to Provide Feedback/Get Support</H3>
+
+<P>
+Please visit 
+<A href="http://hmmsdk.sourceforge.net/">HmmSDK home page</A> 
+for up-to-date information.
+</P>
+
+
+</DIV>
+</BODY>
+</HTML>

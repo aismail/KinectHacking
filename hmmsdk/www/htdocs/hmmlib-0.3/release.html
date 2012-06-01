@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>HmmLib -> Release Note</TITLE>
+<SCRIPT type="text/javascript" language="JavaScript"
+src="stylesheet.js">
+</SCRIPT>
+</HEAD>
+<BODY>
+
+<DIV class="navbar">
+<A name="top">&nbsp;&nbsp;&nbsp;</A><A href="home.html"
+onMouseOver="self.status='Front Page'; return true;"
+onMouseOut="self.status=''; return true;"
+>Home</A>&nbsp;&nbsp;&nbsp;<A href="source.html"
+onMouseOver="self.status='View Source Code on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+>Source</A>&nbsp;&nbsp;&nbsp;<A href="documentation.html"
+onMouseOver="self.status='Browse Documentation on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+>Documentation</A>&nbsp;&nbsp;&nbsp;<A href="download.html"
+onMouseOver="self.status='Download Software/Documentation'; return true;"
+onMouseOut="self.status=''; return true;"
+>Download</A>&nbsp;&nbsp;&nbsp;<A href="feedback.html"
+onMouseOver="self.status='Feedback Information'; return true;"
+onMouseOut="self.status=''; return true;"
+>Feedback</A>
+</DIV>
+
+<DIV class="tophorzbar">
+<TABLE border="0" cellSpacing="0" width="100%">
+<TBODY><TR><TD class="horzbar">
+<TABLE border="0" cellPadding="0" cellSpacing="0">
+<TBODY><TR><TD>
+</TD></TR></TBODY></TABLE>
+</TD></TR></TBODY></TABLE>
+</DIV>
+
+
+<DIV class="body">
+
+<DIV class="heading">
+HmmLib: Hidden Markov Model Library in Java
+</DIV>
+
+<H3>Release Note</H3>
+
+<P>
+Released HmmLib Version 0.3 on
+Feb. 21st, 1999.
+</P>
+
+<P>
+HmmLib contains two essential classes and some utility classes.
+<B>Model.java</B> is a core class which stores all model parameters
+relevant to the underlying Markov model, whereas 
+<B>Hmm.java</B> implements all essential functions of a hidden
+Markov model, including Forward-backward, Viterbi, and
+Baum-Welch algorithms.
+</P>
+
+<P>
+XML parsers of Sun and IBM are also needed from HmmLib v 0.3,
+since it used XML as its internal file format to save HMM model
+parameters.
+If you decide not to use XML, or if you have trouble running
+XML parsers, you can save your model parameters as ASCII formats.
+The source files are heavily commented and you can easily find
+different options for load and save functions.
+</P>
+
+<P>
+Also, you can use different XML parsers in your program.
+Please modify necessary <I>com.bluecraft.hmm.util.*</I> classes
+as needed. In that case, don't forget to change the package name,
+since <I>com.bluecraft.*</I> is the namespace I'm using.
+If you don't have XML parsers,
+you can download them from
+<A href="download.html">the Download Page</A>.
+</P>
+
+
+
+<!--
+<SCRIPT type="text/javascript" language="JavaScript"
+src="counterhidden.js">
+</SCRIPT>
+-->
+<DIV class="copyright">
+<SCRIPT type="text/javascript" language="JavaScript"
+src="footer.js">
+</SCRIPT>
+</DIV>
+</DIV>
+
+
+<DIV class="bottomhorzbar">
+<TABLE border="0" cellSpacing="0" width="100%">
+<TBODY><TR><TD class="horzbar">
+<TABLE border="0" cellPadding="0" cellSpacing="0">
+<TBODY><TR><TD>
+</TD></TR></TBODY></TABLE>
+</TD></TR></TBODY></TABLE>
+</DIV>
+
+<DIV class="navbar">
+<A name="bottom">&nbsp;&nbsp;&nbsp;</A><A href="home.html"
+onMouseOver="self.status='Front Page'; return true;"
+onMouseOut="self.status=''; return true;"
+>Home</A>&nbsp;&nbsp;&nbsp;<A href="source.html"
+onMouseOver="self.status='View Source Code on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+>Source</A>&nbsp;&nbsp;&nbsp;<A href="documentation.html"
+onMouseOver="self.status='Browse Documentation on Line'; return true;"
+onMouseOut="self.status=''; return true;"
+>Documentation</A>&nbsp;&nbsp;&nbsp;<A href="download.html"
+onMouseOver="self.status='Download Software/Documentation'; return true;"
+onMouseOut="self.status=''; return true;"
+>Download</A>&nbsp;&nbsp;&nbsp;<A href="feedback.html"
+onMouseOver="self.status='Feedback Information'; return true;"
+onMouseOut="self.status=''; return true;"
+>Feedback</A>
+</DIV>
+
+
+</BODY>
+</HTML>

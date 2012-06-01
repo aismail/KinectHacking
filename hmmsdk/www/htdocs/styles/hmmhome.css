@@ -1,0 +1,143 @@
+/*
+ * Style sheet for HmmSDK Home Page.
+ * Copyright (c) 2003, Bluecraft Software.  All rights reserved. 
+ * $Id: hmmhome.css,v 1.3 2003/09/10 02:07:25 drwye Exp $
+ */
+
+A:link {
+    text-decoration: none;
+    color: #003399;
+}
+A:visited {
+    text-decoration: none;
+    color: #003399;
+}
+A:active {
+    text-decoration: none;
+    color: #003399;
+}
+A:focus {
+    text-decoration: none;
+    color: #003399;
+}
+A:hover {
+    text-decoration: underline;
+    color: #0066ff; 
+}
+
+BODY {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+    background: #FEFEF8;
+    color: black;
+    margin: 0.02in;
+    margin-bottom: 0.1in;
+}
+P {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+DIV {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+TD {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+TH {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+TR {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+FORM {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+OL {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+UL {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+LI {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+INPUT {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+TEXTAREA {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+SELECT {
+    font-size: x-small;
+    font-family: sans-serif, Verdana, Arial, Geneva;
+}
+B {
+    font-size: x-small;
+    font-family: Verdana, Arial, Geneva, helvetica, sans-serif;
+}
+PRE {
+    font-size: x-small;
+    font-family: courier, sans-serif;
+}
+TT {
+    font-size: x-small;
+    font-family: courier, sans-serif;
+}
+
+.title {
+    color: #003399;
+    font-size: small;
+    font-family: verdana,arial,helvetica,sans-serif;
+}
+
+SPAN.sectitle {
+    font-size: x-small;
+    font-weight: bold;
+    font-family: Verdana, Arial, sans-serif;
+}
+
+SPAN.subsectitle {
+    color: gray;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+SPAN.linktitle {
+    color: #003399;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+SPAN.submenuselected {
+    color: #000055;
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+SPAN.submenu {
+    color: #0055CC;
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+DT.moduletitle {
+    color: #002277;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+
+SPAN.mainmenu {
+    font-size: 0.8em;
+    font-weight: normal;
+}
