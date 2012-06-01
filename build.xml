@@ -1,0 +1,39 @@
+<project name="HandFollower" basedir=".">
+    
+    <!-- Run the Guardian application. -->
+    <target name="run" depends="compile">
+        <echo>java.library.path=${java.library.path}</echo>
+        <java classname="org.aria.h1.Kinect.Main" fork="true">
+            <classpath>
+                <!-- Compiled code -->
+                <pathelement path="${basedir}/build"/>
+                <!-- Processing -->
+                <pathelement path="${basedir}/libs/core.jar"/>
+                <!-- SimpleOpenNI -->
+                <pathelement path="${basedir}/libs/SimpleOpenNI.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Compile HandFollower, the sample application which works
+         with MS Kinect in order to follow your hand. -->
+    <target name="compile" depends="cleanup">
+        <javac
+            srcdir="${basedir}/src"
+            destdir="${basedir}/build">
+            <classpath>
+                <!-- Processing -->
+                <pathelement path="${basedir}/libs/core.jar"/>
+                <!-- SimpleOpenNI -->
+                <pathelement path="${basedir}/libs/SimpleOpenNI.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="cleanup">
+      <delete includeemptydirs="true">
+        <fileset dir="${basedir}/build" includes="**/*"/>
+      </delete>
+    </target>
+
+</project>
