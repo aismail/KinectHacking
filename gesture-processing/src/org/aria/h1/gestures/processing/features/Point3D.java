@@ -56,4 +56,9 @@ public class Point3D {
 		Point3D dist = subtract(a, b);
 		return Math.sqrt(dist.x * dist.x + dist.y * dist.y + dist.z * dist.z);
 	}
+	
+	public String toString() {
+		String str = "("+ x + ", " + y + ", " + z + ")";
+		return str;
+	}
 }
