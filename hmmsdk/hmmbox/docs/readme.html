@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>HmmSDK | HmmBox ReadMe</TITLE>
+<STYLE>
+body {
+    background: #ffffee;
+    color: black;
+    margin-top: 0.05in;
+    margin-bottom: 0.1in;
+}
+a:link {
+    color: green;
+}
+a:visited {
+    color: maroon;
+}
+a:active {
+    color: maroon;
+}
+a:focus {
+    color: red;
+}
+a:hover {
+    color: red;
+}
+div.body {
+    background: #ffffdd;
+    text-align: left;
+    font-family: 'Times New Roman',Georgia,Arial,Helvetica; 
+    font-weight: normal; 
+    color: black;
+    margin: 0.01in;
+    margin-top: 0.01in;
+    margin-bottom: 0.0in;
+    padding: 0.1in;
+    padding-left: 0.2in;
+    padding-right: 0.2in;
+    border-style: none;
+    border-width: thin;
+}
+div.heading {
+    text-align: center;
+    color: green;
+    font-size: 16pt;
+    font-weight: bold;
+    padding-top: 0.05in;
+    padding-bottom: 0.05in;
+}
+span.cvsid {
+    color: black;
+    font-family: Georgia,Arial,Helvetica; 
+    font-size: 8pt;
+    font-weight: normal;
+}
+</STYLE>
+</HEAD>
+<BODY>
+<DIV class="body">
+
+
+<DIV class="heading">
+HmmBox: Hidden Markov Model in the Box<BR>
+<SPAN class="cvsid">$Id: readme.html,v 1.2 2003/05/28 04:57:02 drwye Exp $</SPAN>
+</DIV>
+
+<P>
+<B>HmmBox</B> is a text or console-based test tool. It can also be used as a general-purpose "shell".
+
+It is not intended to be used for commercial purposes, for
+the efficiency was not the primary factor in its implementation.
+Rather, it is hoped that the implementation is clear and transparent
+enough that it can be used as a model program for students wishing 
+to learn basics of hidden Markov models (HMMs).
+<B>HmmBox</B> is a part of a larger software package called <B>HmmSDK</B>,
+and it is built on top of the Hidden Markov Model Library, <B>HmmLib</B>,
+which contains all
+essential functionalities of HMMs.
+
+Please visit 
+<A href="http://hmmsdk.sourceforge.net/">its home page</A> 
+for more information.
+</P>
+
+
+<H3>System Requirements</H3>
+
+<P>
+You need the version 1.4 or later of the software development kit for
+<A HREF="http://java.sun.com/j2se/">
+Java 2 Platform Standard Edition (J2SE)</A>
+in order to be able to use this library.
+
+If you have an eariler version of JDK, then you might still be able to use this: You'll need some extra libraries like XML parsers, and you might have to comment out some JDK1.4 specific keywords such as <I>assert</I>. This configuration is, however, not supported, and <B>HmmBox</B> is currently being developed only with JDK 1.4.
+</P>
+
+
+<H3>Installation</H3>
+
+<P>
+<UL>
+<LI> Unzip <B>hmmsdk-hmmbox-bin-M.m.r.b.zip</B> into an empty directory. (<B>M.m.r.b</B> represents a version number of a particular release.)
+<PRE>
+unzip hmmsdk-hmmbox-bin-M.m.r.b.zip
+</PRE>
+</LI>
+<LI>Please make sure you have the following folders and files:
+<TABLE>
+<TBODY>
+<TR>
+<TD width="180">bluecraft.hmmbox-M.m.jar</TD><TD>Class and resource files. Do not unzip this archive.</TD>
+</TR>
+<TR>
+<TD>lib/</TD><TD>Third-party library directory. These libraries may be required at either run-time or compile-time in order to be able to use <B>HmmBox</B>.</TD>
+</TR>
+<TR>
+<TD>docs/</TD><TD>Documentation directory, which includes this readme file and the public license file for this software.</TD>
+</TR>
+<TR>
+<TD>apidocs/</TD><TD>Javadoc directory. HTML-ized version of source files can be accessed from Javadocs.</TD>
+</TR>
+<TR>
+<TD colspan="2">&nbsp;</TD>
+</TR>
+</TBODY>
+</TABLE>
+</LI>
+<LI>Put <B>bluecraft.hmmbox-M.m.jar</B> and all necessary library files into your CLASSPATH. (For example, on Windows)
+<PRE>
+set CLASSPATH=%CLASSPATH%;"YOUR_DIRECTORY"\bluecraft.hmmbox-M.m.jar
+</PRE>
+</UL>
+</P>
+
+
+<H3>How to Provide Feedback/Get Support</H3>
+
+<P>
+Please visit 
+<A href="http://hmmsdk.sourceforge.net/">HmmSDK home page</A> 
+for up-to-date information.
+</P>
+
+
+</DIV>
+</BODY>
+</HTML>

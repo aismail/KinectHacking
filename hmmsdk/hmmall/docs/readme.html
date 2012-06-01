@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>HmmSDK ReadMe</TITLE>
+<STYLE>
+body {
+    background: #ffffee;
+    color: black;
+    margin-top: 0.05in;
+    margin-bottom: 0.1in;
+}
+a:link {
+    color: green;
+}
+a:visited {
+    color: maroon;
+}
+a:active {
+    color: maroon;
+}
+a:focus {
+    color: red;
+}
+a:hover {
+    color: red;
+}
+div.body {
+    background: #ffffdd;
+    text-align: left;
+    font-family: 'Times New Roman',Georgia,Arial,Helvetica; 
+    font-weight: normal; 
+    color: black;
+    margin: 0.01in;
+    margin-top: 0.01in;
+    margin-bottom: 0.0in;
+    padding: 0.1in;
+    padding-left: 0.2in;
+    padding-right: 0.2in;
+    border-style: none;
+    border-width: thin;
+}
+div.heading {
+    text-align: center;
+    color: green;
+    font-size: 16pt;
+    font-weight: bold;
+    padding-top: 0.05in;
+    padding-bottom: 0.05in;
+}
+span.cvsid {
+    color: black;
+    font-family: Georgia,Arial,Helvetica; 
+    font-size: 8pt;
+    font-weight: normal;
+}
+</STYLE>
+</HEAD>
+<BODY>
+<DIV class="body">
+
+
+<DIV class="heading">
+HmmSDK: Hidden Markov Model Development Kit<BR>
+<SPAN class="cvsid">$Id: readme.html,v 1.1 2003/05/28 04:49:38 drwye Exp $</SPAN>
+</DIV>
+
+<P>
+<B>HmmSDK</B> is a hidden Markov model (HMM) software development kit written in Java. It consists of core library of HMM functions (Forward-backward, Viterbi, and Baum-Welch algorithms) and toolkits for application development. 
+Please visit 
+<A href="http://hmmsdk.sourceforge.net/">its home page</A> 
+for more information.
+</P>
+
+
+<H3>System Requirements</H3>
+
+<P>
+You need the version 1.4 or later of the software development kit for
+<A HREF="http://java.sun.com/j2se/">
+Java 2 Platform Standard Edition (J2SE)</A>
+in order to be able to use this library.
+
+If you have an eariler version of JDK, then you might still be able to use this: You'll need some extra libraries like XML parsers, and you might have to comment out some JDK1.4 specific keywords such as <I>assert</I>. This configuration is, however, not supported, and <B>HmmSDK</B> is currently being developed only with JDK 1.4.
+</P>
+
+
+<H3>Installation</H3>
+
+<P>
+<UL>
+<LI> Unzip <B>hmmsdk-full-M.m.r.zip</B> into an empty directory. (<B>M.m.r</B> represents a version number of a particular release.)
+<PRE>
+unzip hmmsdk-full-M.m.r.zip
+</PRE>
+</LI>
+<LI>Please make sure you have the following folders (among others):
+<TABLE>
+<TBODY>
+<TR>
+<TD width="150">hmmlib/</TD><TD>Core library module.</TD>
+</TR>
+<TR>
+<TD>hmmbox/</TD><TD>Console applications.</TD>
+</TR>
+<TR>
+<TD>hmmall/</TD><TD>Convenience module to build all sub-modules together.</TD>
+</TR>
+</TR>
+<TR>
+<TD>hmmall/apidocs/</TD><TD>Javadoc directory for all modules. HTML-ized version of source files can be accessed from Javadocs.</TD>
+</TR>
+<TR>
+<TD colspan="2">&nbsp;</TD>
+</TR>
+</TBODY>
+</TABLE>
+</LI>
+<LI>Put hmmall/build/bluecraft.hmmsdk-M.m.jar and all necessary library files into your CLASSPATH in order to use <B>HmmSDK</B>. (For example, on Windows)
+<PRE>
+set CLASSPATH=%CLASSPATH%;"YOUR_DIRECTORY"\bluecraft.hmmsdk-M.m.jar
+</PRE>
+</LI>
+<LI>If you would like to build <B>HmmSDK</B> yourself, then take a look at the Ant build script under the hmmall/bin directory. Each module can also be built seperately using its own build script in its bin directory.
+</LI>
+</UL>
+</P>
+
+
+<H3>How to Provide Feedback/Get Support</H3>
+
+<P>
+Please visit 
+<A href="http://hmmsdk.sourceforge.net/">HmmSDK home page</A> 
+for up-to-date information.
+</P>
+
+
+</DIV>
+</BODY>
+</HTML>

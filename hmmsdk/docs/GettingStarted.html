@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>HmmSDK Development: Getting Started</TITLE>
+<STYLE>
+body {
+    background: #fffffb;
+    color: black;
+    margin-top: 0.05in;
+    margin-bottom: 0.1in;
+}
+div.body {
+    background: #fffff3;
+    text-align: left;
+    font-family: 'Times New Roman',Georgia,Arial,Helvetica; 
+    font-weight: normal; 
+    color: black;
+    margin: 0.01in;
+    margin-top: 0.01in;
+    margin-bottom: 0.0in;
+    padding: 0.1in;
+    padding-left: 0.2in;
+    padding-right: 0.2in;
+    border-style: none;
+    border-width: thin;
+}
+div.body a:link {
+    color: green;
+}
+div.body a:visited {
+    color: maroon;
+}
+div.body a:active {
+    color: maroon;
+}
+div.body a:focus {
+    color: red;
+}
+div.body a:hover {
+    color: red;
+}
+div.body div.heading {
+    text-align: center;
+    color: green;
+    font-size: 15pt;
+    font-weight: bold;
+    padding-top: 0.05in;
+    padding-bottom: 0.05in;
+}
+</STYLE>
+</HEAD>
+<BODY>
+<DIV class="body">
+
+
+<DIV class="heading">
+HmmSDK Development: Getting Started
+</DIV>
+
+<P>
+If you would like to contribute to the <B>HmmSDK</B> project,
+you will need to talk to one of the <A href="mailto:hmmsdk-admin@lists.sourceforge.net">admins</A> of the project first.
+The main component of 
+<B>HmmSDK</B> is a library program written in Java, but
+you don't have to be a Java programmer to participate in this project.
+<em>Any</em> contribution commensurate with the overall goal of the project
+will be appreciated.
+
+Please visit 
+<A href="http://hmmsdk.sourceforge.net/">its home page</A> 
+for more information.
+</P>
+
+
+<P>
+Once you decide that you would participate in the project,
+please follow the instructions below.
+This is essentially a summary of many relevant documents
+found in <A href="http://sourceforge.net/docman/?group_id=1">SourceForge.net Doc Page</A>.
+</P>
+
+
+
+<H3>Setting Up Your Development Environment</H3>
+
+<P>
+<OL>
+<LI>If you don't have an account at <A href="http://www.sourceforge.net/">SourceForge.net</A>,
+then the first thing you need to do is
+to <A href="https://sourceforge.net/account/register.php">register</A> as a user.
+</LI>
+<LI>Send email to the <A href="mailto:hmmsdk-admin@lists.sourceforge.net">project admins</A>
+with your intention to join.
+Once you are approved, you will be given the <em>Developer Privilege</em>
+and/or any other appropriate permissions depending on the role you would like to assume in the project.
+</LI>
+<LI>Join the <A href="http://lists.sourceforge.net/lists/listinfo/hmmsdk-devel">developer mailing list</A>.
+It can take up to a day before your request for subscription is processed.
+So, it's important to do this as soon as possible.
+(This is the time when you will need most help from fellow developers.)
+</LI>
+<!--
+<LI>You can also set your account to "monitor" <em>Forums for Developers</em>....
+</LI>
+-->
+<LI>You will need SSH clients (compliant with either SSH1 or SSH2 protocol)
+in order to be able to access CVS repository. I use
+<A href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</A>
+on Windows platform.
+Please refer to <A href="http://sourceforge.net/docman/display_doc.php?docid=6841&group_id=1">this document</A> on SourceForge.net for more information.
+</LI>
+<LI>Create a CVS home directory. This is a one-time process before you can use CVS on SourceForge.net. Here's <A href="http://sourceforge.net/docman/display_doc.php?docid=768&group_id=1#develhomedir">detailed instructions</A>.
+</LI>
+<LI>Generate SSH key pairs. Here's the link to the <A href="http://sourceforge.net/docman/display_doc.php?docid=761&group_id=1">SourceForge document</A>. You can follow the steps in <A href="http://sourceforge.net/docman/display_doc.php?docid=766&group_id=1#sshkeygen">this note</A> if you are using PuTTY on Windows.
+</LI>
+<LI>Upload the public key. This step is also very well explained in the <A href="http://sourceforge.net/docman/display_doc.php?docid=761&group_id=1">SSH document</A> or in <A href="http://sourceforge.net/docman/display_doc.php?docid=766&group_id=1#sshkeyupload">this section</A> of the PuTTY document.
+</LI>
+<LI>Install/configure CVS client.
+If you are using Windows, <A href="http://www.wincvs.org/">WinCVS</A> is recommended.
+Set your CVSROOT to <B><i>yourusername</i>@cvs.sourceforge.net:/cvsroot/hmmsdk</B>
+with the <em>ssh</em> authentication protocol.
+<A href="http://sourceforge.net/docman/display_doc.php?docid=6841&group_id=1">This document</A>
+has a very nice step-by-step instruction on how to set up WinCVS and PuTTY together.
+If you are new to CVS, then you might want to spend some time familiarizing
+yourself with basic functionalities of CVS. Again 
+<A href="http://sourceforge.net/docman/?group_id=1">documentation on SourceForge.net</A>
+is a good starting point.
+</LI>
+<LI>Now the hard part is over.
+It is a good time to subscribe to the
+<A href="http://lists.sourceforge.net/lists/listinfo/hmmsdk-commit">CVS commit message mailing list</A>
+in order to get informed of any changes made to the files in the repository.
+</LI>
+<LI>For a list of active modules in the project, try <tt>'cvs co -c'</tt> or use any correponding command in your CVS client.
+Check out necessary modules and you are all set!
+(Please ask for help from existing members regarding which modules you need to check out.)
+If you are a software developer,
+you will probably want to check out the <em>HmmLib</em> module first (among others).
+The following steps are only necessary if you intend to do some programming.
+(Obviously, you will need to have <A href="http://java.sun.com/j2se/">JDK</A> (v1.4 or later)
+and <A href="http://ant.apache.org/">Ant</A> installed on your system
+before you can proceed. We will assume that it has already been done.)
+</LI>
+<LI>Once you check out the <em>HmmLib</em> module, please spend a bit
+of time browsing through the directory structure.
+(Most modules have a very similar structure.)
+The build files are kept under the directory, <em>bin</em>.
+Build.xml is the common Ant build script, and some user-specific properties
+can be set in the build.properties file (not being used as of this writing).
+</LI>
+<LI>Some of the libraries in the <em>lib</em> directory are needed
+for Ant build process (custom ant tasks).
+You can either include these lib files
+(bluecraft.common-<i>M.m</i>.jar and bluecraft.tools-<i>M.m</i>.jar) in your
+system-level classpath, or you can use some kind of shell scripts
+to set the classpath before you call Ant.
+Please look at the Windows build.bat file for an example.
+(Note that Ant should be invoked from the <em>bin</em> directory.)
+</LI>
+<LI>You can find Java source files under <em>src/java</em>.
+Please try building the hmmlib module at this point.
+You might have to manually create a directory called <em>build</em>
+as a sibling of <em>bin</em> before you can build the module.
+(Use <tt>ant -projecthelp</tt> to list available targets.
+<tt>Compileall</tt> is the default target.)
+If everything goes well, then the output should be
+generated under the <em>build</em> directory.
+</LI>
+<LI>BTW, do not check in the file, com.bluecraft.hmmlib.buildnum.txt,
+under the <em>bin</em> directory. This file is used to generate
+version/build number for <em>official</em> releases.
+</LI>
+<LI>If you would like to build all modules whose names start with <em>hmm</em>,
+then check out all modules first and 
+use the master Ant build file under <em>bin</em> in the <em>HmmAll</em> module.
+Include definitions like
+<tt>hmmlib.project.dir=E:/hmmsdk/hmmlib</tt> and
+<tt>hmmbox.project.dir=E:/hmmsdk/hmmbox</tt>
+in your <i>build.properties</i> file.
+</LI>
+</OL>
+</P>
+
+
+<H3>Getting Support</H3>
+
+<P>
+As with many open-source projects, it's very important for us
+to help each other out. If you are having any trouble setting up
+your initial environment, please send email
+to the <A href="mailto:hmmsdk-devel@lists.sourceforge.net">developer mailing list</A>.
+One of us will gladly help. 
+</P>
+
+
+
+<TABLE width="100%">
+<TR width="100%">
+<TD width="10%" align="left" vAlign="top">&nbsp;</TD>
+<TD width="80%" align="center" vAlign="top">
+    <font color="#a2a2a2" size="-1"><em>Copyright &copy; 2003,</em></font> <A href="http://hmmsdk.sourceforge.net/"><font color="#a2a2a2" size="-1"><em>HmmSDK</em></font></A><BR>
+    <font color="#a2a2a2" size="-1"><em>$Revision: 1.6 $</em></font>
+</TD>
+<TD width="10%" align="right" vAlign="top">&nbsp;</TD>
+</TR>
+</TABLE>
+
+
+</DIV>
+</BODY>
+</HTML>
+
+
+<!--
+  Copyright (c) 2003, Bluecraft Software.  All rights reserved. 
+  $Id: GettingStarted.html,v 1.6 2003/09/12 06:40:05 drwye Exp $
+-->

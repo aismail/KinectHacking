@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+==============================================================================
+Ant build file for Bluecraft HmmSDK | HmmBox Project. 
+
+Authors:
+  Hyoungsoo Yoon: hyoon@bluecraft.com
+
+Legal:
+  Copyright (c) 2003. Bluecraft Software. All Rights Reserved.
+  $Id: build.xml,v 1.6 2003/09/18 03:52:38 drwye Exp $
+==============================================================================
+-->
+
+<project name="bluecraft.hmmbox" default="compileall" basedir="..">
+
+    <!-- Default properties -->    
+    <property file="${user.home}/.build.properties" />
+    <property file="bin/build.properties" />
+
+    <!-- System envrionment settings -->
+    <property environment="myenv" />
+
+    <!-- Generic project properties -->
+    <property name="project.fullname" value="Bluecraft HmmBox Library Implementation"/>
+    <property name="group.name" value="hmmsdk"/>
+    <property name="module.name" value="hmmbox"/>
+    <property name="module.fullname" value="${group.name}-${module.name}"/>
+    <property name="project.name" value="bluecraft.${module.name}"/>
+    <property name="version.file" value="com.bluecraft.hmmbox.buildnum.txt"/>
+
+    <!-- =================================================================== -->
+    <!-- Set the properties related to the source tree                       -->
+    <!-- =================================================================== -->
+
+    <!-- Source locations for the build -->    
+    <property name="src.dir" value="${basedir}/src"/>
+    <property name="src.java.dir" value="${src.dir}/java"/>
+    <property name="bin.dir" value="${basedir}/bin"/>
+    <property name="lib.dir" value="${basedir}/lib"/>    
+
+    <property name="java.root.dir" value="${src.java.dir}/com/bluecraft/hmm"/>    
+    <property name="java.trainer.dir" value="${java.root.dir}/trainer"/>    
+    <property name="java.recognizer.dir" value="${java.root.dir}/recognizer"/>    
+    <property name="java.analyzer.dir" value="${java.root.dir}/analyzer"/>    
+    <property name="java.shell.dir" value="${java.root.dir}/shell"/>    
+    <property name="java.shell.util.dir" value="${java.root.dir}/shell/util"/>    
+
+
+    <!-- =================================================================== -->
+    <!-- Set the properties related to the build area                        -->
+    <!-- =================================================================== -->
+
+    <!-- Destination locations for the build (relative to the basedir as -->
+    <!-- specified in the 'basedir' attribute of the project tag)        -->
+
+    <property name="build.dir" value="${basedir}/build"/>        
+    <property name="build.classes.dir" value="${build.dir}/classes"/>  
+    <property name="build.jar.dir" value="${build.dir}/jar"/>  
+    <property name="apidocs.dir" value="${basedir}/apidocs"/>    
+
+    <!-- Miscellaneous settings -->
+    <property name="year" value="2003"/>
+    <property name="debug" value="on"/>
+    <property name="optimize" value="off"/>
+    <property name="deprecation" value="off"/>  
+
+
+    <!-- =================================================================== -->
+    <!-- Builds Classpath                                                    -->
+    <!-- =================================================================== -->
+    <path id="lib.classpath">
+        <fileset dir="${lib.dir}">
+            <exclude name="junit*.jar"/>
+            <include name="*.jar"/>
+            <include name="*.zip"/>
+        </fileset> 
+    </path>
+    <path id="classpath">
+        <pathelement location="${build.classes.dir}"/>
+        <path refid="lib.classpath"/>
+    </path>
+
+
+    <!-- =================================================================== -->
+    <!-- Version task definition                                             -->
+    <!-- =================================================================== -->
+    <taskdef name="versiontask"
+             classname="com.bluecraft.tools.ant.VersionTask"
+             classpathref="lib.classpath" />
+    <taskdef name="versionstamp"
+             classname="com.bluecraft.tools.ant.VersionStampTask"
+             classpathref="lib.classpath" />
+
+
+    <!-- ================================================================== -->
+    <!-- Displays usage information                                         -->
+    <!-- ================================================================== -->
+    <target name="usage"
+            description="Displays usage information">
+        <echo message="Use -projecthelp to see the available targets"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Initializes the build.                                              -->
+    <!-- =================================================================== -->    
+    <target name="init">
+
+        <!-- So that we can use the ${TSTAMP}, ${DSTAMP}, ... time stamps in targets, if need be -->
+        <tstamp/>
+
+        <echo message="---------- ${project.fullname} ----------"/>
+        <echo message=""/>
+
+        <echo message="java.class.path = ${java.class.path}"/>        
+        <echo message="user.home = ${user.home}"/>
+        <echo message="ant.home = ${ant.home}"/>
+        <echo message="java.home = ${java.home}"/>
+        <echo message="basedir = ${basedir}"/>
+        <echo message=""/>        
+
+<!--
+        <mkdir dir="${build.jar.dir}"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${apidocs.dir}"/>
+-->
+
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Updates the build number                                            -->
+    <!-- =================================================================== -->
+    <target name="buildnumber"
+            depends="init">
+        <echo message="Updating the version file with the new build number"/> 
+        <versiontask file="/${basedir}/bin/${version.file}"/>
+        <versionstamp file="/${basedir}/bin/${version.file}" prefix=""/>
+        <property name="project.tag" value="${project.name}-${version.major.minor}"/>      
+        <property name="project.target.jar"   value="${project.tag}.jar"/>
+        <property name="release.dir" value="${group.name}-${module.name}-${version.major.minor.revision.build}/"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Copy any resource or configuration files                            -->
+    <!-- =================================================================== -->    
+    <target name="resources"
+            depends="init,buildnumber">
+        <copy todir="${build.classes.dir}" includeEmptyDirs="no">
+            <fileset dir="src">
+            <patternset>
+                <include name="**/*.conf"/>
+                <include name="**/*.properties"/>
+            </patternset>
+            </fileset>
+        </copy>
+        <copy todir="${build.classes.dir}" includeEmptyDirs="no">
+            <fileset dir="bin">
+            <patternset>
+                <include name="**/*buildnum.txt"/>
+            </patternset>
+            </fileset>
+        </copy>
+    </target>
+
+
+    <!-- ================================================================== -->
+    <!-- Build Hmm.Shell.Util package                                       -->
+    <!-- ================================================================== -->
+    <target name="hmmshellutil"
+            depends="init" 
+            description="Compiles the hmm.shell.util files">
+        <javac 
+            classpathref="classpath"
+            srcdir="${java.shell.util.dir}/" 
+            destdir="${build.classes.dir}" 
+            includes="**"
+            source="1.4"
+            debug="${debug}"
+            deprecation="${deprecation}"
+            optimize="${optimize}">            
+        </javac>
+        <echo message="Succssfully built the hmm.shell.util Package."/>
+    </target>
+
+    <!-- ================================================================== -->
+    <!-- Build Hmm.Trainer package                                               -->
+    <!-- ================================================================== -->
+    <target name="hmmtrainer"
+            depends="init" 
+            description="Compiles the hmm.trainer files">
+        <javac 
+            classpathref="classpath"
+            srcdir="${java.trainer.dir}/" 
+            destdir="${build.classes.dir}" 
+            includes="**"
+            source="1.4"
+            debug="${debug}"
+            deprecation="${deprecation}"
+            optimize="${optimize}">            
+        </javac>
+        <echo message="Succssfully built the hmm.trainer Package."/>
+    </target>
+
+    <!-- ================================================================== -->
+    <!-- Build Hmm.Recognizer package                                               -->
+    <!-- ================================================================== -->
+    <target name="hmmrecognizer"
+            depends="init" 
+            description="Compiles the hmm.recognizer files">
+        <javac 
+            classpathref="classpath"
+            srcdir="${java.recognizer.dir}/" 
+            destdir="${build.classes.dir}" 
+            includes="**"
+            source="1.4"
+            debug="${debug}"
+            deprecation="${deprecation}"
+            optimize="${optimize}">            
+        </javac>
+        <echo message="Succssfully built the hmm.recognizer Package."/>
+    </target>
+
+    <!-- ================================================================== -->
+    <!-- Build Hmm.Analyzer package                                               -->
+    <!-- ================================================================== -->
+    <target name="hmmanalyzer"
+            depends="init" 
+            description="Compiles the hmm.analyzer files">
+        <javac 
+            classpathref="classpath"
+            srcdir="${java.analyzer.dir}/" 
+            destdir="${build.classes.dir}" 
+            includes="**"
+            source="1.4"
+            debug="${debug}"
+            deprecation="${deprecation}"
+            optimize="${optimize}">            
+        </javac>
+        <echo message="Succssfully built the hmm.analyzer Package."/>
+    </target>
+
+    <!-- ================================================================== -->
+    <!-- Build Hmm.Shell package                                               -->
+    <!-- ================================================================== -->
+    <target name="hmmshell"
+            depends="init" 
+            description="Compiles the hmm.shell files">
+        <javac 
+            classpathref="classpath"
+            srcdir="${java.shell.dir}/" 
+            destdir="${build.classes.dir}" 
+            includes="**"
+            source="1.4"
+            debug="${debug}"
+            deprecation="${deprecation}"
+            optimize="${optimize}">            
+        </javac>
+        <echo message="Succssfully built the hmm.shell Package."/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Compiles all class files                                            -->
+    <!-- =================================================================== -->
+    <target name="compileall"
+            depends="init,hmmshellutil,hmmtrainer,hmmrecognizer,hmmanalyzer,hmmshell">
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Creates the jar file                                                -->
+    <!-- =================================================================== -->
+    <target name="jar"
+            depends="init,compileall,resources,buildnumber" 
+            description="Compiles all source files and creates the jar files">
+        <jar jarfile="${build.jar.dir}/${project.target.jar}" 
+             basedir="${build.classes.dir}"
+             excludes="**/*TestCase.*,**/*TestUnit.*,**/*TestSuite.*">
+            <manifest>
+                <attribute name="Main-Class" value="com.bluecraft.hmm.Hmm"/>
+                <attribute name="Built-By" value="${user.name}"/>
+                <section name="com/bluecraft/hmm/trainer/">
+                    <attribute name="Sealed" value="false"/>
+                    <attribute name="Specification-Title" value="Bluecraft Hmm Trainer Tool"/>
+                    <attribute name="Specification-Version" value="${version.major.minor}"/>
+                    <attribute name="Specification-Vendor" value="Bluecraft Software"/>
+                    <attribute name="Implementation-Title" value="com.bluecraft.hmm.trainer"/>
+                    <attribute name="Implementation-Version" value="${version.major.minor.revision}"/>
+                    <attribute name="Implementation-Vendor" value="Bluecraft Software"/>
+                </section>
+                <section name="com/bluecraft/hmm/recognizer/">
+                    <attribute name="Sealed" value="false"/>
+                    <attribute name="Specification-Title" value="Bluecraft Hmm Recognizer Tool"/>
+                    <attribute name="Specification-Version" value="${version.major.minor}"/>
+                    <attribute name="Specification-Vendor" value="Bluecraft Software"/>
+                    <attribute name="Implementation-Title" value="com.bluecraft.hmm.recognizer"/>
+                    <attribute name="Implementation-Version" value="${version.major.minor.revision}"/>
+                    <attribute name="Implementation-Vendor" value="Bluecraft Software"/>
+                </section>
+                <section name="com/bluecraft/hmm/analyzer/">
+                    <attribute name="Sealed" value="false"/>
+                    <attribute name="Specification-Title" value="Bluecraft Hmm Analyzer Tool"/>
+                    <attribute name="Specification-Version" value="${version.major.minor}"/>
+                    <attribute name="Specification-Vendor" value="Bluecraft Software"/>
+                    <attribute name="Implementation-Title" value="com.bluecraft.hmm.analyzer"/>
+                    <attribute name="Implementation-Version" value="${version.major.minor.revision}"/>
+                    <attribute name="Implementation-Vendor" value="Bluecraft Software"/>
+                </section>
+                <section name="com/bluecraft/hmm/shell/">
+                    <attribute name="Sealed" value="false"/>
+                    <attribute name="Specification-Title" value="Bluecraft Hmm Shell"/>
+                    <attribute name="Specification-Version" value="${version.major.minor}"/>
+                    <attribute name="Specification-Vendor" value="Bluecraft Software"/>
+                    <attribute name="Implementation-Title" value="com.bluecraft.hmm.shell"/>
+                    <attribute name="Implementation-Version" value="${version.major.minor.revision}"/>
+                    <attribute name="Implementation-Vendor" value="Bluecraft Software"/>
+                </section>
+                <section name="com/bluecraft/hmm/shell/util/">
+                    <attribute name="Sealed" value="false"/>
+                    <attribute name="Specification-Title" value="Bluecraft Hmm Shell Utility Classes"/>
+                    <attribute name="Specification-Version" value="${version.major.minor}"/>
+                    <attribute name="Specification-Vendor" value="Bluecraft Software"/>
+                    <attribute name="Implementation-Title" value="com.bluecraft.hmm.shell.util"/>
+                    <attribute name="Implementation-Version" value="${version.major.minor.revision}"/>
+                    <attribute name="Implementation-Vendor" value="Bluecraft Software"/>
+                </section>
+            </manifest>
+        </jar>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Generates the project's API documentation                           -->
+    <!-- =================================================================== -->
+    <target name="apidocs"
+            depends="compileall" 
+            description="Generates the project's API documentation">
+        <mkdir dir="${apidocs.dir}"/>
+
+        <javadoc sourcepath="${src.java.dir}" 
+                 packagenames="com.bluecraft.hmm.trainer.*,com.bluecraft.hmm.recognizer.*,com.bluecraft.hmm.analyzer.*,com.bluecraft.hmm.shell.*,com.bluecraft.hmm.shell.util.*"
+                 destdir="${apidocs.dir}"
+                 author="true"
+                 private="false"
+                 version="true"
+                 use="true"
+                 source="1.4"
+                 additionalparam="-linksource"
+                 windowtitle="${project.fullname} API"
+                 doctitle="${project.fullname}"                
+                 bottom="&lt;SPAN style='font-size:0.9em;text-align:center;'&gt;Copyright &#169; ${year} Bluecraft Software. All Rights Reserved.&lt;/SPAN&gt;">
+            <classpath refid="classpath"/>
+            <doclet name="com.bluecraft.tools.doclets.indigo.IndigoStandard"
+                    path="${lib.dir}/bluecraft.tools-0.9.jar">
+            </doclet>
+            <!-- <tag name="todo" scope="all" description="To do:" /> -->
+        </javadoc>
+
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Cleans up the distribution                                          -->
+    <!-- =================================================================== -->
+    <target name="clean"
+            depends="init"
+            description="Cleans up the distribution">
+        <delete dir="${build.jar.dir}"/>
+        <delete dir="${build.classes.dir}"/>
+        <delete dir="${apidocs.dir}"/>
+
+        <mkdir dir="${build.jar.dir}"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${apidocs.dir}"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Rebuilds everything                                                 -->
+    <!-- =================================================================== -->
+    <target name="rebuild"
+            depends="init,clean,jar,apidocs" 
+            description="Rebuilds everything"
+    />
+
+
+    <!-- =================================================================== -->
+    <!-- Builds the Bluecraft.HmmBox release package                         -->
+    <!-- =================================================================== -->   
+    <target name="release-full"
+            depends="rebuild">
+            <!-- description="Builds the snapshot of the Bluecraft.HmmBox codebase for release" -->
+        <delete dir="${release.dir}"/>
+
+        <copy todir="${release.dir}" filtering="off">
+            <fileset dir=".">
+                <exclude name="**/*~"/>
+                <exclude name="*TODO*"/>
+                <exclude name=".classpath"/>
+                <exclude name=".project"/>
+                <exclude name="bak/**"/>
+                <exclude name="*.zip"/>          
+                <exclude name="**/*.lnk"/>
+                <exclude name="**/*.url"/>
+            </fileset>
+        </copy>
+        
+        <zip zipfile="${module.fullname}-full-${version.major.minor.revision.build}.zip"
+             basedir="${release.dir}/../"
+             includes="${release.dir}/"
+        />
+
+        <delete dir="${release.dir}"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Builds the binary release of the Bluecraft.HmmBox package           -->
+    <!-- =================================================================== -->   
+    <target name="release-bin"
+            depends="rebuild"> 
+            <!-- description="Builds the binary release of the Bluecraft.HmmBox package" -->
+        <delete dir="${release.dir}"/>
+
+        <copy todir="${release.dir}" filtering="off">
+            <fileset dir=".">
+                <exclude name="**/*~"/>
+                <exclude name="*TODO*"/>
+                <exclude name=".classpath"/>
+                <exclude name=".project"/>
+                <exclude name="bak/**"/>
+                <exclude name="bin/**"/>
+                <exclude name="src/**"/>
+                <exclude name="build/**"/>
+                <exclude name="*.zip"/>
+                <exclude name="**/*.lnk"/>
+                <exclude name="**/*.url"/>
+            </fileset>
+        </copy>
+        <copy todir="${release.dir}" filtering="off">
+            <fileset dir="build/jar">
+                <patternset>
+                    <include name="**/*.jar"/>
+                </patternset>
+            </fileset>
+        </copy>
+        <copy todir="${release.dir}/schema" filtering="off">
+            <fileset dir="src/schema">
+                <patternset>
+                    <include name="**/*.xml"/>
+                    <include name="**/*.dtd"/>
+                </patternset>
+            </fileset>
+        </copy>
+
+        <zip zipfile="${module.fullname}-bin-${version.major.minor.revision.build}.zip"
+             basedir="${release.dir}/../"
+             includes="${release.dir}/"
+        />
+
+        <delete dir="${release.dir}"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Builds the source release of the Bluecraft.HmmBox package           -->
+    <!-- =================================================================== -->   
+    <target name="release-src"
+            depends="rebuild">
+            <!-- description="Builds the source release of the Bluecraft.HmmBox package" -->
+        <delete dir="${release.dir}"/>
+
+        <copy todir="${release.dir}" filtering="off">
+            <fileset dir=".">
+                <exclude name="**/*~"/>
+                <exclude name="*TODO*"/>
+                <exclude name=".classpath"/>
+                <exclude name=".project"/>
+                <exclude name="bak/**"/>
+                <exclude name="apidocs/**"/>
+                <exclude name="build/**"/>
+                <exclude name="*.zip"/>
+                <exclude name="**/*.lnk"/>
+                <exclude name="**/*.url"/>
+            </fileset>
+        </copy>
+
+        <zip zipfile="${module.fullname}-src-${version.major.minor.revision.build}.zip"
+             basedir="${release.dir}/../"
+             includes="${release.dir}/"
+        />
+
+        <delete dir="${release.dir}"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Builds the (default) Bluecraft.HmmBox release package               -->
+    <!-- =================================================================== -->   
+    <target name="release"
+            depends="release-bin"
+            description="Builds the default (binary) release file for the Bluecraft.HmmBox package">
+    </target>
+
+</project>
+

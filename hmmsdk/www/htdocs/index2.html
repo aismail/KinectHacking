@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML lang="en">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>Hidden Markov Model Development Kit (Redirection Page)</TITLE>
+<META HTTP-EQUIV="REFRESH" CONTENT="10; URL=home.php">
+
+<SCRIPT type="text/javascript">
+// Start Page Selector
+var startPage = "home.php"; // default
+var allcookies = document.cookie;
+var pos = allcookies.indexOf("hmmsdkhome=");
+if(pos != -1) {
+  var start = pos + 16;
+  var end = allcookies.indexOf(";", start);
+  if(end == -1) {
+    end = allcookies.length;
+  }
+  var value = allcookies.substring(start,end);
+  startPage = unescape(value);
+}
+
+// Frame Buster
+function bustFrame() {
+    if (parent.frames.length != 0) {
+        parent.location=document.location;
+    } else {
+       document.location=startPage;
+    }
+}
+</SCRIPT>
+</HEAD>
+
+<BODY onLoad='setTimeout ("bustFrame()", 10);'>
+
+<P align="center" style="color:silver;">
+Hidden Markov Model Development Kit Project Home<BR>
+If your browser does not direct you to the appropriate page
+automatically, please start from
+<A href="home.php" style="color:silver;font-weight: bold;">Project Info Page</A>.
+</P>
+
+</BODY>
+</HTML>
+
+<!--
+  Copyright (c) 2003, BlueCraft Software.  All rights reserved. 
+  $Id: index2.html,v 1.1.1.1 2003/02/09 00:29:40 drwye Exp $
+-->
+
