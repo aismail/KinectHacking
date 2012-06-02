@@ -1,6 +1,7 @@
 package org.aria.h1.Kinect;
 
 import processing.core.PApplet;
+import SimpleOpenNI.SimpleOpenNI;
 import processing.core.PImage;
 import java.util.LinkedList;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class DisplayApplet extends PApplet {
 	private PImage image;
 	private Skeleton skeleton;
 	private Map<Long, LinkedList<Point2D.Float>> handCoordinates;
+	private SimpleOpenNI context;
 	
 	public void setup() {
 		size(640, 480);
@@ -27,6 +29,11 @@ public class DisplayApplet extends PApplet {
 		setLocation(0, 0);
 		if (image != null)
 			image(image, 0, 0, image.width, image.height);
+		
+		if (skeleton != null && skeleton != Constants.NULL_SKELETON)
+			skeleton.draw(this);
+		popStyle();
+		smooth();
 		
 		/*
 		int idx = 0;
@@ -83,5 +90,60 @@ public class DisplayApplet extends PApplet {
 	
 	public void setHandCoordinates(Map<Long, LinkedList<Point2D.Float>> handCoordinates) {
 		this.handCoordinates = handCoordinates;
+	}
+	
+	public void setContext(SimpleOpenNI context) {
+		this.context = context;
+	}
+	
+	//--------------------------------------------------------------------------
+	
+	public void onNewUser(int userId)
+	{
+	  System.out.println("onNewUser - userId: " + userId);
+	  System.out.println("  start pose detection");
+	  
+	  context.startPoseDetection("Psi",userId);
+	}
+
+	public void onLostUser(int userId)
+	{
+	  System.out.println("onLostUser - userId: " + userId);
+	}
+
+	public void onStartCalibration(int userId)
+	{
+	  System.out.println("onStartCalibration - userId: " + userId);
+	}
+
+	public void onEndCalibration(int userId, boolean successfull)
+	{
+	  System.out.println("onEndCalibration - userId: " + userId + ", successfull: " + successfull);
+	  
+	  if (successfull) 
+	  { 
+	    System.out.println("  User calibrated !!!");
+	    context.startTrackingSkeleton(userId); 
+	  } 
+	  else 
+	  { 
+	    System.out.println("  Failed to calibrate user !!!");
+	    System.out.println("  Start pose detection");
+	    context.startPoseDetection("Psi",userId);
+	  }
+	}
+
+	public void onStartPose(String pose,int userId)
+	{
+	  System.out.println("onStartPose - userId: " + userId + ", pose: " + pose);
+	  System.out.println(" stop pose detection");
+	  
+	  context.stopPoseDetection(userId); 
+	  context.requestCalibrationSkeleton(userId, true);
+	}
+
+	public void onEndPose(String pose,int userId)
+	{
+	  System.out.println("onEndPose - userId: " + userId + ", pose: " + pose);
 	}
 }

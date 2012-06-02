@@ -16,7 +16,7 @@ public class Main {
 			applet.start();
 			
 			Kinect kinect = new Kinect(applet);
-			DepthImageRetriever retriever = new DepthImageRetriever(applet, kinect);
+			KinectRetriever retriever = new KinectRetriever(applet, kinect);
 			retriever.start();
 			
 			frame.setVisible(true);

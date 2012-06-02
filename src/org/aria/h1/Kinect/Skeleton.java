@@ -44,6 +44,9 @@ public class Skeleton {
 	private void extractPosition3D(Kinect kinect, int userId) {
 		SimpleOpenNI context = kinect.getContext();
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD, head);
+		System.out.println(head.getPosition().getX());
+		System.out.println(head.getPosition().getY());
+		System.out.println(head.getPosition().getZ());
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_NECK, neck);
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER, leftShoulder);
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_ELBOW, leftElbow);
@@ -107,13 +110,15 @@ public class Skeleton {
 	}
 	
 	public Skeleton(Kinect kinect, int userId) {
-		if (kinect == null)
+		if (kinect == null) {
+			System.out.println("No kinect :-(");
 			return;
+		}
 		
+		System.out.println("We can haz kinect");
 		extractPosition3D(kinect, userId);
 		extractPosition2D(kinect, userId);
 	}
-	
 	
 	public XnSkeletonJointPosition getHead() {
 		return head;

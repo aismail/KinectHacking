@@ -3,7 +3,6 @@ package org.aria.h1.Kinect;
 import SimpleOpenNI.SimpleOpenNI;
 import SimpleOpenNI.XnVFlowRouter;
 import SimpleOpenNI.XnVSessionManager;
-import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Kinect {
@@ -17,7 +16,7 @@ public class Kinect {
 	 * TODO: analyze whether we really need
 	 * the Applet dependency and ditch it.
 	 */
-	public Kinect(PApplet applet) {
+	public Kinect(DisplayApplet applet) {
 		SimpleOpenNI  context;
 		XnVSessionManager sessionManager;
 		XnVFlowRouter flowRouter;
@@ -26,13 +25,9 @@ public class Kinect {
 		context.setMirror(true); 
 		context.enableDepth();
 		context.enableRGB();
-		this.setContext(context);
-		
-		/*
-		Uncomment this + add your own kung-fu magic to get skeleton data.
-
 		context.enableGesture();
 		context.enableHands();
+		this.setContext(context);
 		context.enableUser(SimpleOpenNI.SKEL_PROFILE_ALL);
 		
 		sessionManager = context.createSessionManager("Click,Wave", "RaiseHand");
@@ -40,7 +35,7 @@ public class Kinect {
 		sessionManager.AddListener(flowRouter);
 		this.setFlowRouter(flowRouter);
 		this.setSessionManager(sessionManager);
-		*/
+		applet.setContext(context);
 	}
 	
 	/*
@@ -48,7 +43,7 @@ public class Kinect {
 	 */
 	public void updateContext() {
 		this.getContext().update();
-		//this.getContext().update(this.getSessionManager());
+		this.getContext().update(this.getSessionManager());
 	}
 	
 	/*
