@@ -41,6 +41,8 @@ public class Skeleton {
 	private XnVector3D rightKnee_projective = new XnVector3D();
 	private XnVector3D rightFoot_projective = new XnVector3D();
 	
+	private int userId;
+	
 	private void extractPosition3D(Kinect kinect, int userId) {
 		SimpleOpenNI context = kinect.getContext();
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD, head);
@@ -87,6 +89,11 @@ public class Skeleton {
 	}
 	
 	public void draw(PApplet applet) {
+		if (userId % 2 == 0)
+			applet.stroke(255, 0, 0);
+		else
+			applet.stroke(0, 0, 255);
+		
 		line(applet, head_projective, neck_projective);
 		
 		line(applet, neck_projective, leftShoulder_projective);
@@ -118,6 +125,8 @@ public class Skeleton {
 		System.out.println("We can haz kinect");
 		extractPosition3D(kinect, userId);
 		extractPosition2D(kinect, userId);
+		
+		this.userId = userId;
 	}
 	
 	public XnSkeletonJointPosition getHead() {
