@@ -13,10 +13,17 @@ public class DisplayApplet extends PApplet {
 	 */
 	private static final long serialVersionUID = -4077388692790706464L;
 	private PImage image;
-	private Skeleton skeleton;
+	private LinkedList<Skeleton> skeletons;
 	private Map<Long, LinkedList<Point2D.Float>> handCoordinates;
 	private SimpleOpenNI context;
+	private boolean writing;
 	
+	public DisplayApplet(){
+		skeletons = new LinkedList<Skeleton>();
+		writing = false;
+	}
+
+
 	public void setup() {
 		size(640, 480);
 		background(250,0,0);
@@ -30,8 +37,13 @@ public class DisplayApplet extends PApplet {
 		if (image != null)
 			image(image, 0, 0, image.width, image.height);
 		
-		if (skeleton != null && skeleton != Constants.NULL_SKELETON)
-			skeleton.draw(this);
+
+
+		for(Skeleton skeleton : skeletons){
+			if (skeleton != null && skeleton != Constants.NULL_SKELETON)
+				skeleton.draw(this);
+		}
+
 		popStyle();
 		smooth();
 		
@@ -84,10 +96,18 @@ public class DisplayApplet extends PApplet {
 		this.image = image;
 	}
 
-	public void setSkeleton(Skeleton skeleton) {
-		this.skeleton = skeleton;
+	//public void setSkeleton(Skeleton skeleton) {
+	//	this.skeleton = skeleton;
+	//}
+
+	public void addSkeleton(Skeleton skeleton){
+		this.skeletons.add(skeleton);
 	}
 	
+	public void clearSkeletons(){
+		this.skeletons.clear();
+	}
+
 	public void setHandCoordinates(Map<Long, LinkedList<Point2D.Float>> handCoordinates) {
 		this.handCoordinates = handCoordinates;
 	}
@@ -96,6 +116,14 @@ public class DisplayApplet extends PApplet {
 		this.context = context;
 	}
 	
+	public void mark_busy(){
+		this.writing = true;
+	}
+
+	public void mark_available(){
+		this.writing = false;
+	}	
+
 	//--------------------------------------------------------------------------
 	
 	public void onNewUser(int userId)

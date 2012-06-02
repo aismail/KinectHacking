@@ -19,7 +19,8 @@
     <target name="compile" depends="cleanup">
         <javac
             srcdir="${basedir}/src"
-            destdir="${basedir}/build">
+            destdir="${basedir}/build"
+	    debug="true">
             <classpath>
                 <!-- Processing -->
                 <pathelement path="${basedir}/libs/core.jar"/>
