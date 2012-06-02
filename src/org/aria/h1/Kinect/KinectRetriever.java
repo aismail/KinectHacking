@@ -36,7 +36,6 @@ public class KinectRetriever extends Thread {
 
 			if (users.size() > 0) {
 				System.out.println("I can haz user!");
-				applet.mark_busy();
 				for (int i = 0; i < users.size(); i++) {
 					int user_id = users.get(i);
 					if (kinect.getContext().isTrackingSkeleton(user_id)) {
@@ -47,7 +46,6 @@ public class KinectRetriever extends Thread {
 						System.out.println("We are NOT tracking skeleton");
 					}
 				}
-				applet.mark_available();
 			}
 			
 		}

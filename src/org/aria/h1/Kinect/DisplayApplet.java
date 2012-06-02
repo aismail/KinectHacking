@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import SimpleOpenNI.SimpleOpenNI;
 import processing.core.PImage;
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Map;
 import java.awt.geom.Point2D;
 
@@ -13,14 +14,12 @@ public class DisplayApplet extends PApplet {
 	 */
 	private static final long serialVersionUID = -4077388692790706464L;
 	private PImage image;
-	private LinkedList<Skeleton> skeletons;
+	private ConcurrentLinkedQueue<Skeleton> skeletons;
 	private Map<Long, LinkedList<Point2D.Float>> handCoordinates;
 	private SimpleOpenNI context;
-	private boolean writing;
 	
 	public DisplayApplet(){
-		skeletons = new LinkedList<Skeleton>();
-		writing = false;
+		skeletons = new ConcurrentLinkedQueue<Skeleton>();
 	}
 
 
@@ -36,14 +35,10 @@ public class DisplayApplet extends PApplet {
 		setLocation(0, 0);
 		if (image != null)
 			image(image, 0, 0, image.width, image.height);
-		
 
-
-		for(Skeleton skeleton : skeletons){
+		for(Skeleton skeleton : skeletons)
 			if (skeleton != null && skeleton != Constants.NULL_SKELETON)
 				skeleton.draw(this);
-		}
-
 		popStyle();
 		smooth();
 		
@@ -96,10 +91,6 @@ public class DisplayApplet extends PApplet {
 		this.image = image;
 	}
 
-	//public void setSkeleton(Skeleton skeleton) {
-	//	this.skeleton = skeleton;
-	//}
-
 	public void addSkeleton(Skeleton skeleton){
 		this.skeletons.add(skeleton);
 	}
@@ -115,14 +106,6 @@ public class DisplayApplet extends PApplet {
 	public void setContext(SimpleOpenNI context) {
 		this.context = context;
 	}
-	
-	public void mark_busy(){
-		this.writing = true;
-	}
-
-	public void mark_available(){
-		this.writing = false;
-	}	
 
 	//--------------------------------------------------------------------------
 	
