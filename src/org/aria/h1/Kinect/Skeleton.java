@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.aria.h1.Kinect.gestures.GestureDetector;
+import org.aria.h1.Kinect.gestures.LinearGestureDetector;
+import org.aria.h1.Kinect.gestures.PointTracker;
+import org.aria.h1.Kinect.gestures.SkeletonJointPositionTracker;
+
 import processing.core.PApplet;
 import SimpleOpenNI.SimpleOpenNI;
 import SimpleOpenNI.XnSkeletonJointPosition;
@@ -52,10 +57,21 @@ public class Skeleton {
 	private XnVector3D rightKnee_projective = new XnVector3D();
 	private XnVector3D rightFoot_projective = new XnVector3D();
 
+	private List<GestureDetector> gestures;
+
 	public Skeleton(SimpleOpenNI context, int userId) {
 		this.context = context;
 		this.userId = userId;
 		tracking = false;
+		initGestures();
+	}
+
+	private void initGestures() {
+		gestures = new ArrayList<GestureDetector>();
+		PointTracker leftHandTracker = new SkeletonJointPositionTracker(leftHand);
+		gestures.add(new LinearGestureDetector("left-hand-wave", leftHandTracker));
+		//PointTracker rightHandTracker = new SkeletonJointPositionTracker(leftHand);
+		//gestures.add(new LinearGestureDetector("right-hand-wave", rightHandTracker));
 	}
 
 	public int getUserId() {
@@ -73,6 +89,11 @@ public class Skeleton {
 		}
 		extractPosition3D();
 		extractPosition2D();
+		for (GestureDetector gesture : gestures) {
+			gesture.sample();
+			if (gesture.detect())
+				System.out.println("Detected gesture on skeleton " + userId + ": " + gesture.getId());
+		}
 		tracking = true;
 		return true;
 	}
