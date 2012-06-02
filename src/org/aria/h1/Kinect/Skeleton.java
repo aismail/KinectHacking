@@ -1,5 +1,9 @@
 package org.aria.h1.Kinect;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import processing.core.PApplet;
 import SimpleOpenNI.SimpleOpenNI;
 import SimpleOpenNI.XnSkeletonJointPosition;
@@ -9,6 +13,13 @@ import SimpleOpenNI.XnVector3D;
  * Represents the position of a user's skeleton.
  */
 public class Skeleton {
+
+	public static Color SKELETON_COLORS[] = { null, Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.CYAN, Color.MAGENTA };
+
+	private SimpleOpenNI context;
+	private int userId;
+	private boolean tracking;
+
 	private XnSkeletonJointPosition head = new XnSkeletonJointPosition();
 	private XnSkeletonJointPosition neck = new XnSkeletonJointPosition();
 	private XnSkeletonJointPosition leftShoulder = new XnSkeletonJointPosition();
@@ -24,7 +35,7 @@ public class Skeleton {
 	private XnSkeletonJointPosition rightHip = new XnSkeletonJointPosition();
 	private XnSkeletonJointPosition rightKnee = new XnSkeletonJointPosition();
 	private XnSkeletonJointPosition rightFoot = new XnSkeletonJointPosition();
-	
+
 	private XnVector3D head_projective = new XnVector3D();
 	private XnVector3D neck_projective = new XnVector3D();
 	private XnVector3D leftShoulder_projective = new XnVector3D();
@@ -40,13 +51,34 @@ public class Skeleton {
 	private XnVector3D rightHip_projective = new XnVector3D();
 	private XnVector3D rightKnee_projective = new XnVector3D();
 	private XnVector3D rightFoot_projective = new XnVector3D();
-	
-	private void extractPosition3D(Kinect kinect, int userId) {
-		SimpleOpenNI context = kinect.getContext();
+
+	public Skeleton(SimpleOpenNI context, int userId) {
+		this.context = context;
+		this.userId = userId;
+		tracking = false;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public boolean isTracking() {
+		return tracking;
+	}
+
+	public boolean update() {
+		if (!context.isTrackingSkeleton(userId)) {
+			tracking = false;
+			return false;
+		}
+		extractPosition3D();
+		extractPosition2D();
+		tracking = true;
+		return true;
+	}
+
+	private void extractPosition3D() {
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD, head);
-		System.out.println(head.getPosition().getX());
-		System.out.println(head.getPosition().getY());
-		System.out.println(head.getPosition().getZ());
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_NECK, neck);
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER, leftShoulder);
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_ELBOW, leftElbow);
@@ -62,9 +94,8 @@ public class Skeleton {
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_RIGHT_KNEE, rightKnee);
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_RIGHT_FOOT, rightFoot);
 	}
-	
-	private void extractPosition2D(Kinect kinect, int userId) {
-		SimpleOpenNI context = kinect.getContext();
+
+	private void extractPosition2D() {
 		context.convertRealWorldToProjective(head.getPosition(), head_projective);
 		context.convertRealWorldToProjective(neck.getPosition(), neck_projective);
 		context.convertRealWorldToProjective(leftShoulder.getPosition(), leftShoulder_projective);
@@ -81,133 +112,157 @@ public class Skeleton {
 		context.convertRealWorldToProjective(rightKnee.getPosition(), rightKnee_projective);
 		context.convertRealWorldToProjective(rightFoot.getPosition(), rightFoot_projective);
 	}
-	
+
 	private void line(PApplet applet, XnVector3D p1, XnVector3D p2) {
 		applet.line(p1.getX(), p1.getY(), p2.getX(), p2.getY());
 	}
-	
+
 	public void draw(PApplet applet) {
+		if (userId < SKELETON_COLORS.length)
+			applet.stroke(SKELETON_COLORS[userId].getRed(), SKELETON_COLORS[userId].getGreen(), SKELETON_COLORS[userId].getBlue());
+		else
+			applet.stroke(0, 0, 0);
+
 		line(applet, head_projective, neck_projective);
-		
+
 		line(applet, neck_projective, leftShoulder_projective);
 		line(applet, leftShoulder_projective, leftElbow_projective);
 		line(applet, leftElbow_projective, leftHand_projective);
-		
+
 		line(applet, neck_projective, rightShoulder_projective);
 		line(applet, rightShoulder_projective, rightElbow_projective);
 		line(applet, rightElbow_projective, rightHand_projective);
-		
+
 		line(applet, leftShoulder_projective, torso_projective);
 		line(applet, rightShoulder_projective, torso_projective);
-		
+
 		line(applet, torso_projective, leftHip_projective);
 		line(applet, leftHip_projective, leftKnee_projective);
 		line(applet, leftKnee_projective, leftFoot_projective);
-		
+
 		line(applet, torso_projective, rightHip_projective);
 		line(applet, rightHip_projective, rightKnee_projective);
 		line(applet, rightKnee_projective, rightFoot_projective);
 	}
-	
-	public Skeleton(Kinect kinect, int userId) {
-		if (kinect == null) {
-			System.out.println("No kinect :-(");
-			return;
-		}
-		
-		System.out.println("We can haz kinect");
-		extractPosition3D(kinect, userId);
-		extractPosition2D(kinect, userId);
-	}
-	
+
 	public XnSkeletonJointPosition getHead() {
 		return head;
 	}
+
 	public void setHead(XnSkeletonJointPosition head) {
 		this.head = head;
 	}
+
 	public XnSkeletonJointPosition getNeck() {
 		return neck;
 	}
+
 	public void setNeck(XnSkeletonJointPosition neck) {
 		this.neck = neck;
 	}
+
 	public XnSkeletonJointPosition getLeftShoulder() {
 		return leftShoulder;
 	}
+
 	public void setLeftShoulder(XnSkeletonJointPosition leftShoulder) {
 		this.leftShoulder = leftShoulder;
 	}
+
 	public XnSkeletonJointPosition getLeftElbow() {
 		return leftElbow;
 	}
+
 	public void setLeftElbow(XnSkeletonJointPosition leftElbow) {
 		this.leftElbow = leftElbow;
 	}
+
 	public XnSkeletonJointPosition getLeftHand() {
 		return leftHand;
 	}
+
 	public void setLeftHand(XnSkeletonJointPosition leftHand) {
 		this.leftHand = leftHand;
 	}
+
 	public XnSkeletonJointPosition getRightShoulder() {
 		return rightShoulder;
 	}
+
 	public void setRightShoulder(XnSkeletonJointPosition rightShoulder) {
 		this.rightShoulder = rightShoulder;
 	}
+
 	public XnSkeletonJointPosition getRightElbow() {
 		return rightElbow;
 	}
+
 	public void setRightElbow(XnSkeletonJointPosition rightElbow) {
 		this.rightElbow = rightElbow;
 	}
+
 	public XnSkeletonJointPosition getRightHand() {
 		return rightHand;
 	}
+
 	public void setRightHand(XnSkeletonJointPosition rightHand) {
 		this.rightHand = rightHand;
 	}
+
 	public XnSkeletonJointPosition getTorso() {
 		return torso;
 	}
+
 	public void setTorso(XnSkeletonJointPosition torso) {
 		this.torso = torso;
 	}
+
 	public XnSkeletonJointPosition getLeftHip() {
 		return leftHip;
 	}
+
 	public void setLeftHip(XnSkeletonJointPosition leftHip) {
 		this.leftHip = leftHip;
 	}
+
 	public XnSkeletonJointPosition getLeftKnee() {
 		return leftKnee;
 	}
+
 	public void setLeftKnee(XnSkeletonJointPosition leftKnee) {
 		this.leftKnee = leftKnee;
 	}
+
 	public XnSkeletonJointPosition getLeftFoot() {
 		return leftFoot;
 	}
+
 	public void setLeftFoot(XnSkeletonJointPosition leftFoot) {
 		this.leftFoot = leftFoot;
 	}
+
 	public XnSkeletonJointPosition getRightHip() {
 		return rightHip;
 	}
+
 	public void setRightHip(XnSkeletonJointPosition rightHip) {
 		this.rightHip = rightHip;
 	}
+
 	public XnSkeletonJointPosition getRightKnee() {
 		return rightKnee;
 	}
+
 	public void setRightKnee(XnSkeletonJointPosition rightKnee) {
 		this.rightKnee = rightKnee;
 	}
+
 	public XnSkeletonJointPosition getRightFoot() {
 		return rightFoot;
 	}
+
 	public void setRightFoot(XnSkeletonJointPosition rightFoot) {
 		this.rightFoot = rightFoot;
 	}
+
 }
